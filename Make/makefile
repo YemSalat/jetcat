@@ -71,21 +71,11 @@ $(BUILD_DIR)/common_utilities$(OBJ_EXT): $(COMMON_LIBS)/common_utilities$(CPP_EX
 $(BUILD_DIR)/common_events$(OBJ_EXT): $(COMMON_LIBS)/common_events$(CPP_EXT) $(COMMON_LIBS)/common_events$(H_EXT)
 	$(TOOL_CPP) $(CC_FLAGS) -c -o $@ $< -I $(COMMON_LIBS)
 
-$(BUILD_DIR)/common_swap$(OBJ_EXT): $(COMMON_LIBS)/common_swap$(CPP_EXT) $(COMMON_LIBS)/common_swap$(H_EXT)
-	$(TOOL_CPP) $(CC_FLAGS) -c -o $@ $< -I $(COMMON_LIBS)
-
 $(BUILD_DIR)/base64$(OBJ_EXT): $(BASE64)/Base64$(CPP_EXT) $(BASE64)/Base64$(H_EXT)
 	$(TOOL_CPP) $(CC_FLAGS) -c -o $@ $< -I $(COMMON_LIBS) -I $(BASE64)
 
-$(BUILD_DIR)/databuffer$(OBJ_EXT): $(COMMON_LIBS)/databuffer$(CPP_EXT) $(COMMON_LIBS)/databuffer$(H_EXT)
-	$(TOOL_CPP) $(CC_FLAGS) -c -o $@ $< -I $(COMMON_LIBS) -I $(BASE64)
-
-$(BUILD_DIR)/nettcp$(OBJ_EXT): $(NETWORK)/nettcp$(CPP_EXT) $(NETWORK)/nettcp$(H_EXT)
-	$(TOOL_CPP) $(CC_FLAGS) -c -o $@ $< -I $(COMMON_LIBS) -I $(NETWORK) -I$(NETWORK)/..
-
-$(BUILD_DIR)/$(LIB)common$(LIB_EXT): $(BUILD_DIR)/common_swap$(OBJ_EXT) $(BUILD_DIR)/common_events$(OBJ_EXT) \
-	$(BUILD_DIR)/common_utilities$(OBJ_EXT) $(BUILD_DIR)/base64$(OBJ_EXT) $(BUILD_DIR)/databuffer$(OBJ_EXT) \
-	$(BUILD_DIR)/nettcp$(OBJ_EXT)
+$(BUILD_DIR)/$(LIB)common$(LIB_EXT): $(BUILD_DIR)/common_events$(OBJ_EXT) \
+	$(BUILD_DIR)/common_utilities$(OBJ_EXT) $(BUILD_DIR)/base64$(OBJ_EXT)
 	$(TOOL_AR) rvs $@ $^
 
 # Surface library
